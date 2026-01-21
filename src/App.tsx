@@ -227,18 +227,34 @@ function Page() {
     e.preventDefault()
     setRegisterError("")
     setRegisterSuccess("")
-    const email = registerEmail.trim()
-    const password = registerPassword
-    if (!email || !password) {
+    const emailAddress = registerEmail.trim()
+    const passwordValue = registerPassword
+    if (!emailAddress || !passwordValue) {
       setRegisterError("Please provide email and password.")
       return
     }
     try {
-      const { error } = await register(email, password)
-      if (error) {
-        setRegisterError(error.message || 'Registration failed.')
+      const { data, error } = await register(emailAddress, passwordValue)
+
+      // Supabase duplicate email behavior: when an email is already registered,
+      // signUp may return user with identities as an empty array and no error.
+      const identities = (data as any)?.user?.identities
+      const duplicateByIdentities = Array.isArray(identities) && identities.length === 0
+
+      if (duplicateByIdentities) {
+        setRegisterError('This email is already in use. Please log in or reset your password.')
         return
       }
+
+      if (error) {
+        const errorStatusCode = (error as any)?.status ?? 0
+        const errorMessageLower = (error.message || '').toLowerCase()
+        const isAlreadyUsed = errorStatusCode === 422 || errorStatusCode === 409 || errorMessageLower.includes('already') || errorMessageLower.includes('exists') || errorMessageLower.includes('registered') || errorMessageLower.includes('in use')
+        setRegisterError(isAlreadyUsed ? 'This email is already in use. Please log in or reset your password.' : (error.message || 'Registration failed.'))
+        return
+      }
+
+      // If no error and not a duplicate, success: Supabase will send a confirmation email
       setRegisterSuccess("Registration successful. Please check your email to confirm your account.")
       setRegisterEmail("")
       setRegisterPassword("")

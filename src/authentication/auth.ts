@@ -24,7 +24,11 @@ export async function login(email: string, password: string) {
 }
 
 export async function register(email: string, password: string) {
-  const redirectTo = (import.meta as any)?.env?.VITE_EMAIL_REDIRECT_TO || window.location.origin
+  const envVars = (import.meta as any)?.env ?? {}
+  const configuredRedirect = envVars.VITE_EMAIL_REDIRECT_TO
+  const isProductionBuild = !!envVars.PROD
+  const defaultProductionRedirect = 'https://development-platforms-ca-simon.netlify.app/'
+  const redirectTo = configuredRedirect || (isProductionBuild ? defaultProductionRedirect : window.location.origin)
   return supabase.auth.signUp({
     email,
     password,
