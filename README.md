@@ -140,10 +140,10 @@ create policy if not exists "Delete own posts"
 
 ## Motivation
 
-- Why Option 2: Enjoyed building a full-stack experience quickly using Supabase’s hosted auth and database, focusing effort on UX and product flow instead of server plumbing.
-- What I liked: Rapid iteration, integrated auth, and straightforward client API. Tailwind improved iteration speed on responsive UI.
+- Why Option 2: Enjoyed building a full-stack experience quickly using Supabase’s hosted auth and database, it help focusing on UX and product flow as a front-end developer instead of server plumbling.
+- What I liked: Rapid iteration, integrated auth, and straightforward client API. Tailwind improved iteration speed on responsive UI. Overall just a cool project.
 - What I didn’t enjoy: RLS can be tricky to get exactly right; email confirmation flows require environment configuration to test locally.
-- What was difficult: Balancing minimal UI with sufficient feedback and guarding create routes by auth while keeping the code simple.
+- What was difficult: Balancing minimal UI with sufficient feedback and guarding create routes by auth while keeping the code simple. I also spent alot of time trying to learn React this time for future projects.
 - Custom API vs Supabase: A custom API offers full control and flexibility at the cost of maintenance and security burdens. Supabase accelerates development with managed auth, storage, and SQL access, ideal for prototypes and small/medium apps, while still allowing SQL-level control via RLS.
 
 
