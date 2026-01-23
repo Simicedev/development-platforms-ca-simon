@@ -1,5 +1,8 @@
 # Supabase News (Option 2: Frontend with Supabase)
 
+Webiste url: https://development-platforms-ca-simon.netlify.app/
+
+
 A responsive React + Vite + Tailwind frontend using Supabase for authentication (with email confirmation) and a simple articles database. Includes conditional navigation based on auth and Row Level Security (RLS) policies.
 
 ## Installation
