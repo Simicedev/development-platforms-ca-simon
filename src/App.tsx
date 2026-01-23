@@ -66,9 +66,9 @@ function Page() {
     // Parse query for single post view and handle browser navigation
     function applyLocation() {
       const params = new URLSearchParams(window.location.search)
-      const pid = params.get('post')
-      if (pid) {
-        setSelectedPostId(pid)
+      const postId = params.get('post')
+      if (postId) {
+        setSelectedPostId(postId)
         setView('single')
       } else {
         setSelectedPostId(null)
